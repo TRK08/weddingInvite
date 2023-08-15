@@ -14,19 +14,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
         with:
-          node-version: 'v16.13.2'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 16.x
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      - name: Install
-        run: yarn install
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
 
       - name: Build project
-        run: npm run build
+        run: yarn build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
