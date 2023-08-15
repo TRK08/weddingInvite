@@ -14,11 +14,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'v16.13.2'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install
+        run: yarn install
 
       - name: Build project
         run: npm run build
